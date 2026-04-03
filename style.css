@@ -1,0 +1,637 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap');
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* no page scroll — game fills the viewport */
+}
+
+/* ─── Root shell ─────────────────────────────────────────── */
+#root {
+    font-family: 'Space Mono', monospace;
+    background: #07070f;
+    color: #dde0f0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ─── Screens ────────────────────────────────────────────── */
+.screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 3vw, 40px);
+    overflow-y: auto;
+}
+
+/* ─── Landing ────────────────────────────────────────────── */
+.brand {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 5vw, 52px);
+    font-weight: 800;
+    letter-spacing: clamp(4px, 1vw, 10px);
+    color: #c8b8ff;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.tagline {
+    font-size: clamp(9px, 1.2vw, 13px);
+    letter-spacing: 3px;
+    color: #44445a;
+    text-transform: uppercase;
+    margin-bottom: clamp(20px, 4vh, 40px);
+    text-align: center;
+}
+
+.topic-choose-lbl {
+    font-size: clamp(10px, 1.2vw, 13px);
+    color: #7766cc;
+    letter-spacing: 1px;
+    margin-bottom: clamp(12px, 2vh, 20px);
+    text-align: center;
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 1.5vw, 20px);
+    width: 100%;
+    max-width: clamp(300px, 55vw, 640px);
+    margin-bottom: clamp(18px, 3vh, 36px);
+}
+
+.topic-card {
+    background: #0e0e1c;
+    border: 1.5px solid #1e1e36;
+    border-radius: 14px;
+    padding: clamp(14px, 2.5vw, 28px) clamp(12px, 2vw, 24px);
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .15s;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(5px, 1vh, 10px);
+}
+
+.topic-card:hover {
+    border-color: #c8b8ff;
+    background: #13132a;
+    transform: translateY(-2px);
+}
+
+.topic-card.selected {
+    border-color: #c8b8ff;
+    background: #13132a;
+}
+
+.topic-icon {
+    font-size: clamp(18px, 2.5vw, 28px);
+}
+
+.topic-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(13px, 1.5vw, 18px);
+    font-weight: 700;
+    color: #dde0f0;
+}
+
+.topic-desc {
+    font-size: clamp(9px, 1vw, 12px);
+    color: #44445a;
+    letter-spacing: 1px;
+    line-height: 1.5;
+}
+
+.topic-count {
+    font-size: clamp(9px, 1vw, 12px);
+    color: #7766cc;
+    margin-top: 2px;
+}
+
+.start-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(10px, 1.2vw, 14px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: #c8b8ff;
+    color: #07070f;
+    border: none;
+    padding: clamp(12px, 1.8vh, 18px) clamp(28px, 5vw, 60px);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background .2s, transform .1s;
+}
+
+.start-btn:hover {
+    background: #e0d4ff;
+}
+
+.start-btn:active {
+    transform: scale(.97);
+}
+
+.start-btn:disabled {
+    background: #2a2a3a;
+    color: #44445a;
+    cursor: not-allowed;
+}
+
+/* ─── Game screen ────────────────────────────────────────── */
+#game {
+    flex-direction: column;
+    gap: clamp(8px, 1.5vh, 18px);
+    padding: clamp(10px, 2vw, 32px);
+}
+
+/* ─── Top bar ────────────────────────────────────────────── */
+.top-bar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.topic-badge {
+    font-size: clamp(9px, 1vw, 11px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    color: #9988dd;
+    padding: clamp(4px, 0.6vh, 7px) clamp(10px, 1.5vw, 18px);
+    border-radius: 20px;
+}
+
+.stats-row {
+    display: flex;
+    gap: clamp(14px, 3vw, 32px);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(16px, 2.5vw, 28px);
+    font-weight: 700;
+    color: #c8b8ff;
+}
+
+.stat-lbl {
+    font-size: clamp(8px, 0.9vw, 11px);
+    letter-spacing: 1px;
+    color: #44445a;
+    text-transform: uppercase;
+}
+
+/* ─── Main game area (figure + right panel side-by-side) ─── */
+.game-area {
+    width: 100%;
+    max-width: 1200px;
+    flex: 1;
+    display: flex;
+    gap: clamp(16px, 4vw, 60px);
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    /* allow flex children to shrink */
+}
+
+/* ─── Figure panel ───────────────────────────────────────── */
+.figure-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(6px, 1.2vh, 14px);
+    flex-shrink: 0;
+}
+
+.figure-svg {
+    width: clamp(150px, 22vw, 300px);
+    height: clamp(175px, 25vw, 350px);
+}
+
+.lives-bar {
+    display: flex;
+    gap: clamp(4px, 0.8vw, 8px);
+}
+
+.lheart {
+    width: clamp(10px, 1.4vw, 16px);
+    height: clamp(10px, 1.4vw, 16px);
+    background: #ff5577;
+    clip-path: polygon(50% 100%, 0 38%, 15% 12%, 35% 2%, 50% 18%, 65% 2%, 85% 12%, 100% 38%);
+    transition: background .3s;
+}
+
+.lheart.gone {
+    background: #251520;
+}
+
+.wrong-label {
+    font-size: clamp(8px, 0.9vw, 10px);
+    color: #33334a;
+    letter-spacing: 1px;
+}
+
+.wrong-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    max-width: clamp(150px, 22vw, 300px);
+}
+
+.wl {
+    width: clamp(20px, 2.5vw, 30px);
+    height: clamp(20px, 2.5vw, 30px);
+    border: 1px solid #3a1a2a;
+    background: #180a12;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(10px, 1.2vw, 14px);
+    font-weight: 700;
+    color: #ff5577;
+    text-transform: uppercase;
+    animation: pop .18s ease;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ─── Right panel ────────────────────────────────────────── */
+.right-panel {
+    flex: 1;
+    min-width: 0;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.5vh, 18px);
+    justify-content: center;
+}
+
+.hint-box {
+    background: #0b0f0b;
+    border-left: 3px solid #7766cc;
+    padding: clamp(8px, 1.2vh, 14px) clamp(10px, 1.5vw, 18px);
+    border-radius: 0 8px 8px 0;
+}
+
+.hint-lbl {
+    font-size: clamp(8px, 0.9vw, 10px);
+    letter-spacing: 2px;
+    color: #7766cc;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.hint-txt {
+    font-size: clamp(11px, 1.3vw, 15px);
+    color: #9090b0;
+    line-height: 1.6;
+}
+
+.word-row {
+    display: flex;
+    gap: clamp(4px, 0.8vw, 10px);
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: clamp(8px, 1.2vh, 16px) 0;
+}
+
+.lb {
+    width: clamp(22px, 3vw, 40px);
+    height: clamp(30px, 4vh, 50px);
+    border-bottom: 2px solid #3a3a5a;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: clamp(14px, 2vw, 24px);
+    font-weight: 700;
+    color: #c8b8ff;
+    padding-bottom: 3px;
+    text-transform: uppercase;
+    transition: all .2s;
+}
+
+.lb.gap {
+    border-bottom-color: transparent;
+    width: clamp(6px, 1vw, 14px);
+}
+
+/* ─── Keyboard ───────────────────────────────────────────── */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3px, 0.6vh, 6px);
+    align-items: center;
+    width: 100%;
+}
+
+.krow {
+    display: flex;
+    gap: clamp(3px, 0.5vw, 6px);
+}
+
+.key {
+    width: clamp(28px, 3.8vw, 50px);
+    height: clamp(28px, 3.8vw, 50px);
+    border: 1px solid #2a2a4a;
+    background: #10101e;
+    color: #8080a0;
+    font-size: clamp(10px, 1.2vw, 15px);
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .15s;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key:hover:not([disabled]) {
+    background: #1c1c36;
+    border-color: #7766cc;
+    color: #c8b8ff;
+}
+
+.key[disabled] {
+    opacity: .22;
+    cursor: not-allowed;
+}
+
+.key.ok {
+    background: #0a1a12;
+    border-color: #44cc88;
+    color: #44cc88;
+}
+
+.key.bad {
+    background: #1a0810;
+    border-color: #ff5577;
+    color: #ff5577;
+}
+
+/* ─── Bottom bar ─────────────────────────────────────────── */
+.bottom-bar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #1a1a2a;
+    padding-top: clamp(6px, 1vh, 12px);
+    flex-shrink: 0;
+}
+
+.skip-btn,
+.back-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(9px, 1vw, 12px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid #2a2a4a;
+    color: #55556a;
+    padding: clamp(6px, 1vh, 10px) clamp(10px, 1.5vw, 18px);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.skip-btn:hover {
+    border-color: #ff5577;
+    color: #ff5577;
+}
+
+.back-btn:hover {
+    border-color: #7766cc;
+    color: #7766cc;
+}
+
+/* ─── Result overlay ─────────────────────────────────────── */
+.result-overlay {
+    width: 100%;
+    max-width: 480px;
+    background: #0e0e1c;
+    border: 1.5px solid #2a2a4a;
+    border-radius: 16px;
+    padding: clamp(18px, 3vh, 36px) clamp(20px, 4vw, 48px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 1.5vh, 16px);
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    animation: fadeUp .25s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -46%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Make game container position:relative so overlay anchors correctly */
+#game {
+    position: relative;
+}
+
+.res-icon {
+    width: clamp(44px, 6vw, 64px);
+    height: clamp(44px, 6vw, 64px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.res-icon.win {
+    background: #0a2a1a;
+    border: 2px solid #44cc88;
+}
+
+.res-icon.lose {
+    background: #2a0a10;
+    border: 2px solid #ff5577;
+}
+
+.res-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 800;
+}
+
+.res-title.win {
+    color: #44cc88;
+}
+
+.res-title.lose {
+    color: #ff5577;
+}
+
+.res-word {
+    font-size: clamp(10px, 1.2vw, 13px);
+    color: #55556a;
+}
+
+.res-word span {
+    color: #dde0f0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.res-exp {
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: #55556a;
+    line-height: 1.7;
+    background: #080810;
+    border: 1px solid #1a1a2a;
+    border-radius: 8px;
+    padding: clamp(10px, 1.5vh, 16px) clamp(12px, 2vw, 20px);
+    text-align: left;
+    width: 100%;
+}
+
+.res-exp b {
+    color: #9988dd;
+    font-weight: 700;
+}
+
+.next-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(10px, 1.2vw, 13px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: #c8b8ff;
+    color: #07070f;
+    border: none;
+    padding: clamp(10px, 1.5vh, 16px) clamp(24px, 4vw, 48px);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
+    max-width: 300px;
+    transition: background .2s;
+}
+
+.next-btn:hover {
+    background: #e0d4ff;
+}
+
+/* ─── Responsive: stack on smaller screens ───────────────── */
+@media (max-width: 680px) {
+
+    html,
+    body {
+        overflow: auto;
+    }
+
+    #root {
+        height: auto;
+        min-height: 100vh;
+        overflow: auto;
+        justify-content: flex-start;
+    }
+
+    .screen {
+        height: auto;
+        overflow: visible;
+        padding: 20px 14px 28px;
+        justify-content: flex-start;
+    }
+
+    #game {
+        position: static;
+    }
+
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .figure-svg {
+        width: 140px;
+        height: 165px;
+    }
+
+    .right-panel {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+    }
+
+    .result-overlay {
+        position: fixed;
+        width: calc(100% - 28px);
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .topic-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .key {
+        width: 26px;
+        height: 26px;
+        font-size: 9px;
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save The Man</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div id="root">
+    <div id="landing" class="screen">
+      <div class="brand">Save Man</div>
+      <div class="tagline">Guess letters — keep him standing</div>
+
+      <div class="topic-choose-lbl">Choose your topic</div>
+
+      <div class="topic-grid" id="topic-grid">
+        <div class="topic-card" data-topic="html" onclick="selectTopic(this,'html')">
+          <div class="topic-icon">&#60;/&#62;</div>
+          <div class="topic-name">HTML</div>
+          <div class="topic-desc">Tags, attributes, semantics &amp; structure</div>
+          <div class="topic-count">20 questions</div>
+        </div>
+        <div class="topic-card" data-topic="css" onclick="selectTopic(this,'css')">
+          <div class="topic-icon">#{ }</div>
+          <div class="topic-name">CSS</div>
+          <div class="topic-desc">Selectors, flexbox, grid &amp; animations</div>
+          <div class="topic-count">20 questions</div>
+        </div>
+        <div class="topic-card" data-topic="js" onclick="selectTopic(this,'js')">
+          <div class="topic-icon">JS</div>
+          <div class="topic-name">JavaScript</div>
+          <div class="topic-desc">Closures, async, DOM &amp; ES6+</div>
+          <div class="topic-count">20 questions</div>
+        </div>
+        <div class="topic-card" data-topic="tech" onclick="selectTopic(this,'tech')">
+          <div class="topic-icon">&#9881;</div>
+          <div class="topic-name">General Tech</div>
+          <div class="topic-desc">Networks, algorithms, databases &amp; more</div>
+          <div class="topic-count">20 questions</div>
+        </div>
+      </div>
+
+      <button class="start-btn" id="start-btn" disabled onclick="startGame()">Select a topic to start</button>
+    </div>
+
+    <div id="game" class="screen" style="display:none"></div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
